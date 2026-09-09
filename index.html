@@ -4,7 +4,7 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ˆ®HêH–’•¶???</title>
+  <title>æ—­å·¥å ´é£Ÿäº‹æ³¨æ–‡???</title>
   <style>
     * { box-sizing: border-box; }
     
@@ -28,7 +28,7 @@
     }
     .hidden { display: none !important; }
 
-    /* ƒwƒbƒ_[FŒÅ’è‰ğœ */
+    /* ãƒ˜ãƒƒãƒ€ãƒ¼ï¼šå›ºå®šè§£é™¤ */
     .header { 
       display: flex; align-items: center; justify-content: space-between; 
       min-height: 2.5rem; padding: 0.5rem 0.6rem; 
@@ -46,7 +46,7 @@
       text-overflow: ellipsis;
     }
 
-    /* ƒ{ƒ^ƒ“Šî’ê */
+    /* ãƒœã‚¿ãƒ³åŸºåº• */
     .btn { min-height: 2.2rem; padding: 0.4rem 0.8rem; border: 0; border-radius: 8px; font-weight: bold; cursor: pointer; touch-action: manipulation; font-size: 0.9rem; }
     .btn-red { color: #fff; background: #d32f2f; }
     .btn-red:hover { background: #b71c1c; }
@@ -62,24 +62,24 @@
     .container { max-width: 900px; margin: 0.5rem auto; padding: 0 0.5rem; }
     .panel { background: #fff; border-radius: 12px; padding: 0.8rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 0.6rem; }
 
-    /* ƒRƒ“ƒeƒ“ƒc•¶šƒTƒCƒY 20% k¬ */
+    /* ã‚³ãƒ³ãƒ†ãƒ³ãƒ„æ–‡å­—ã‚µã‚¤ã‚º 20% ç¸®å° */
     #orderSection {
       font-size: 0.8rem !important;
     }
 
-    /* ƒƒOƒCƒ“‰æ–Ê */
+    /* ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ */
     .login-panel { max-width: 480px; margin: 1.5rem auto; text-align: center; }
     .login-panel h2 { color: #d32f2f; margin-top: 0; font-size: 1.3rem; }
     .login-input { width: 100%; height: 2.6rem; font-size: 1.1rem; padding: 0.3rem 0.6rem; margin: 0.8rem 0; border: 2px solid #ccc; border-radius: 8px; text-align: center; }
 
-    /* ŒØ‘Öƒ{ƒ^ƒ“ */
+    /* æœˆåˆ‡æ›¿ãƒœã‚¿ãƒ³ */
     .month-nav { display: flex; gap: 0.4rem; margin-bottom: 0.6rem; }
     .month-nav .btn { flex: 1; font-size: 0.85em; }
 
     .user-info { line-height: 1.5; }
     .btn-menu { width: 100%; margin-top: 0.5rem; background: #e65100; color: #fff; font-size: 0.9em; min-height: 2.2rem; }
 
-    /* ’•¶ƒJ[ƒh */
+    /* æ³¨æ–‡ã‚«ãƒ¼ãƒ‰ */
     .day-card { border: 2px solid #e0e0e0; border-left: 8px solid #d32f2f; border-radius: 10px; background: #fff; margin-bottom: 0.6rem; padding: 0.5rem; cursor: pointer; transition: background-color 0.2s; }
     .day-card.locked { border-left-color: #9e9e9e; background: #f2f2f2; opacity: 0.7; cursor: not-allowed; }
     
@@ -88,7 +88,7 @@
     .status-open { background-color: #2e7d32; }
     .status-closed { background-color: #757575; }
 
-    /* ƒƒjƒ…[•\¦ƒGƒŠƒA */
+    /* ãƒ¡ãƒ‹ãƒ¥ãƒ¼è¡¨ç¤ºã‚¨ãƒªã‚¢ */
     .menu-grid-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; text-align: center; margin-bottom: 4px; }
     .menu-grid-bottom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; text-align: center; }
     
@@ -115,7 +115,7 @@
       color: #ffffff;
     }
 
-    /* ƒ|ƒbƒvƒAƒbƒvEƒ‚[ƒ_ƒ‹ */
+    /* ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ãƒ»ãƒ¢ãƒ¼ãƒ€ãƒ« */
     .modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: flex-end; justify-content: center; background: rgba(0,0,0,0.6); }
     .modal-center { align-items: center !important; }
     .modal-panel { width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; background: #fff; border-radius: 18px 18px 0 0; padding: 1.2rem; }
@@ -123,7 +123,7 @@
     
     .modal-title { font-size: 1.1rem; font-weight: bold; color: #d32f2f; margin-bottom: 0.8rem; border-bottom: 2px solid #d32f2f; padding-bottom: 0.4rem; text-align: center; }
 
-    /* “ü—ÍƒtƒH[ƒ€ */
+    /* å…¥åŠ›ãƒ•ã‚©ãƒ¼ãƒ  */
     .form-group { margin-bottom: 0.8rem; text-align: left; }
     .form-group label { display: block; font-weight: bold; margin-bottom: 0.2rem; font-size: 0.9em; }
     .form-control { width: 100%; height: 2.2rem; font-size: 0.9em; padding: 0.2rem 0.5rem; border: 1.5px solid #ccc; border-radius: 6px; }
@@ -156,126 +156,126 @@
 </head>
 <body>
 
-  <!-- ƒwƒbƒ_[ -->
+  <!-- ãƒ˜ãƒƒãƒ€ãƒ¼ -->
   <header class="header">
     <div style="width:1.5rem;"></div>
-    <h1>ˆ®HêH–’•¶</h1>
-    <button id="logoutBtn" class="btn btn-secondary btn-logout hidden" onclick="logoutApp()">ƒƒOƒAƒEƒg</button>
+    <h1>æ—­å·¥å ´é£Ÿäº‹æ³¨æ–‡</h1>
+    <button id="logoutBtn" class="btn btn-secondary btn-logout hidden" onclick="logoutApp()">ãƒ­ã‚°ã‚¢ã‚¦ãƒˆ</button>
   </header>
 
   <main class="container">
-    <!-- ƒƒOƒCƒ“‰æ–Ê -->
+    <!-- ãƒ­ã‚°ã‚¤ãƒ³ç”»é¢ -->
     <section id="loginSection" class="panel login-panel">
-      <h2>ƒƒOƒCƒ“</h2>
-      <input type="text" id="loginEmpCode" class="login-input" placeholder="ĞˆõƒR[ƒh‚ğ“ü—Í">
-      <button class="btn btn-red" style="width:100%; min-height: 2.6rem;" onclick="doLogin()">ƒƒOƒCƒ“</button>
+      <h2>ãƒ­ã‚°ã‚¤ãƒ³</h2>
+      <input type="text" id="loginEmpCode" class="login-input" placeholder="ç¤¾å“¡ã‚³ãƒ¼ãƒ‰ã‚’å…¥åŠ›">
+      <button class="btn btn-red" style="width:100%; min-height: 2.6rem;" onclick="doLogin()">ãƒ­ã‚°ã‚¤ãƒ³</button>
       <div id="loginMsg" style="color:#d32f2f; font-weight:bold; margin-top:0.5rem;"></div>
     </section>
 
-    <!-- ƒƒCƒ“’•¶‰æ–Ê -->
+    <!-- ãƒ¡ã‚¤ãƒ³æ³¨æ–‡ç”»é¢ -->
     <section id="orderSection" class="hidden">
-      <!-- ŒØ‘Öƒ{ƒ^ƒ“ -->
+      <!-- æœˆåˆ‡æ›¿ãƒœã‚¿ãƒ³ -->
       <div class="month-nav">
-        <button id="btnPrev" class="btn btn-secondary" onclick="changeMonth(-1)">æŒ</button>
-        <button id="btnCurr" class="btn btn-red" onclick="changeMonth(0)">“–Œ</button>
-        <button id="btnNext" class="btn btn-secondary" onclick="changeMonth(1)">—ˆŒ</button>
+        <button id="btnPrev" class="btn btn-secondary" onclick="changeMonth(-1)">å…ˆæœˆ</button>
+        <button id="btnCurr" class="btn btn-red" onclick="changeMonth(0)">å½“æœˆ</button>
+        <button id="btnNext" class="btn btn-secondary" onclick="changeMonth(1)">æ¥æœˆ</button>
       </div>
 
       <div class="panel user-info">
-        <div><strong>ĞˆõƒR[ƒh:</strong> <span id="dispEmpCode"></span></div>
-        <div><strong>–¼:</strong> <span id="dispEmpName"></span> (<span id="dispDept"></span>)</div>
-        <button class="btn btn-menu" onclick="openWeeklyMenu()">?? ¡T‚Ìƒƒjƒ…[‚ğŒ©‚é</button>
+        <div><strong>ç¤¾å“¡ã‚³ãƒ¼ãƒ‰:</strong> <span id="dispEmpCode"></span></div>
+        <div><strong>æ°å:</strong> <span id="dispEmpName"></span> (<span id="dispDept"></span>)</div>
+        <button class="btn btn-menu" onclick="openWeeklyMenu()">?? ä»Šé€±ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’è¦‹ã‚‹</button>
       </div>
 
-      <!-- 1“ú‚²‚Æ‚ÌƒJ[ƒhˆê—— -->
+      <!-- 1æ—¥ã”ã¨ã®ã‚«ãƒ¼ãƒ‰ä¸€è¦§ -->
       <div id="cardContainer"></div>
     </section>
   </main>
 
-  <!-- Ğˆõî•ñŠm”Fƒ|ƒbƒvƒAƒbƒv -->
+  <!-- ç¤¾å“¡æƒ…å ±ç¢ºèªãƒãƒƒãƒ—ã‚¢ãƒƒãƒ— -->
   <div id="loginConfirmModal" class="modal modal-center">
     <div class="modal-panel modal-panel-center">
-      <div class="modal-title">Ğˆõî•ñŠm”F</div>
+      <div class="modal-title">ç¤¾å“¡æƒ…å ±ç¢ºèª</div>
       <div style="margin: 1rem 0; font-size: 0.95rem; text-align: left; line-height: 1.8;">
-        <div><strong>ĞˆõƒR[ƒh:</strong> <span id="confirmEmpCode"></span></div>
-        <div><strong>–¼:</strong> <span id="confirmEmpName"></span></div>
-        <div><strong>•”:</strong> <span id="confirmDept"></span></div>
+        <div><strong>ç¤¾å“¡ã‚³ãƒ¼ãƒ‰:</strong> <span id="confirmEmpCode"></span></div>
+        <div><strong>æ°å:</strong> <span id="confirmEmpName"></span></div>
+        <div><strong>éƒ¨ç½²:</strong> <span id="confirmDept"></span></div>
       </div>
       <div style="display:flex; gap:0.5rem;">
-        <button class="btn btn-secondary" style="flex:1; min-height:2.4rem;" onclick="closeLoginConfirmModal()">ƒLƒƒƒ“ƒZƒ‹</button>
-        <button class="btn btn-red" style="flex:1; min-height:2.4rem;" onclick="proceedToOrder()">Šm”F</button>
+        <button class="btn btn-secondary" style="flex:1; min-height:2.4rem;" onclick="closeLoginConfirmModal()">ã‚­ãƒ£ãƒ³ã‚»ãƒ«</button>
+        <button class="btn btn-red" style="flex:1; min-height:2.4rem;" onclick="proceedToOrder()">ç¢ºèª</button>
       </div>
     </div>
   </div>
 
-  <!-- V‹KĞˆõ“o˜^ƒ|ƒbƒvƒAƒbƒv -->
+  <!-- æ–°è¦ç¤¾å“¡ç™»éŒ²ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ— -->
   <div id="registerModal" class="modal modal-center">
     <div class="modal-panel modal-panel-center">
-      <div class="modal-title">V‹KĞˆõ“o˜^</div>
-      <p style="font-size: 0.85em; color: #666; margin-bottom: 0.8rem;">“o˜^‚ª‚ ‚è‚Ü‚¹‚ñBV‹K“o˜^‚ğs‚Á‚Ä‚­‚¾‚³‚¢B</p>
+      <div class="modal-title">æ–°è¦ç¤¾å“¡ç™»éŒ²</div>
+      <p style="font-size: 0.85em; color: #666; margin-bottom: 0.8rem;">ç™»éŒ²ãŒã‚ã‚Šã¾ã›ã‚“ã€‚æ–°è¦ç™»éŒ²ã‚’è¡Œã£ã¦ãã ã•ã„ã€‚</p>
       
       <div class="form-group">
-        <label>ĞˆõƒR[ƒh</label>
+        <label>ç¤¾å“¡ã‚³ãƒ¼ãƒ‰</label>
         <input type="text" id="regEmpCode" class="form-control" readonly style="background:#eee;">
       </div>
       
       <div class="form-group">
-        <label>–¼ <span style="color:red;">*</span></label>
-        <input type="text" id="regEmpName" class="form-control" placeholder="R“c ‘¾˜Y">
+        <label>æ°å <span style="color:red;">*</span></label>
+        <input type="text" id="regEmpName" class="form-control" placeholder="å±±ç”° å¤ªéƒ">
       </div>
       
       <div class="form-group">
-        <label>•”–¼</label>
+        <label>éƒ¨ç½²å</label>
         <select id="regDeptSelect" class="form-control" onchange="toggleCustomDept()">
-          <option value="‘–±•”">‘–±•”</option>
-          <option value="‹Zp•”">‹Zp•”</option>
-          <option value="‰c‹Æ•”">‰c‹Æ•”</option>
-          <option value="•iØ•”">•iØ•”</option>
-          <option value="»‘¢•”">»‘¢•”</option>
-          <option value="q‹ó‹@">q‹ó‹@</option>
-          <option value="¶ŠÇEw”ƒ•”">¶ŠÇEw”ƒ•”</option>
-          <option value="__OTHER__">’¼Ú“ü—Íi©—R‹Lqj</option>
+          <option value="ç·å‹™éƒ¨">ç·å‹™éƒ¨</option>
+          <option value="æŠ€è¡“éƒ¨">æŠ€è¡“éƒ¨</option>
+          <option value="å–¶æ¥­éƒ¨">å–¶æ¥­éƒ¨</option>
+          <option value="å“è¨¼éƒ¨">å“è¨¼éƒ¨</option>
+          <option value="è£½é€ éƒ¨">è£½é€ éƒ¨</option>
+          <option value="èˆªç©ºæ©Ÿ">èˆªç©ºæ©Ÿ</option>
+          <option value="ç”Ÿç®¡ãƒ»è³¼è²·éƒ¨">ç”Ÿç®¡ãƒ»è³¼è²·éƒ¨</option>
+          <option value="__OTHER__">ç›´æ¥å…¥åŠ›ï¼ˆè‡ªç”±è¨˜è¿°ï¼‰</option>
         </select>
       </div>
 
       <div class="form-group hidden" id="customDeptGroup">
-        <label>•”–¼i’¼Ú“ü—Íj</label>
-        <input type="text" id="regCustomDept" class="form-control" placeholder="•”–¼‚ğ“ü—Í">
+        <label>éƒ¨ç½²åï¼ˆç›´æ¥å…¥åŠ›ï¼‰</label>
+        <input type="text" id="regCustomDept" class="form-control" placeholder="éƒ¨ç½²åã‚’å…¥åŠ›">
       </div>
 
       <div id="regMsg" style="color:red; font-size:0.85em; margin-bottom:0.5rem;"></div>
 
       <div style="display:flex; gap:0.5rem; margin-top: 1rem;">
-        <button class="btn btn-secondary" style="flex:1; min-height:2.4rem;" onclick="closeRegisterModal()">ƒLƒƒƒ“ƒZƒ‹</button>
-        <button class="btn btn-red" style="flex:1; min-height:2.4rem;" onclick="doRegister()">“o˜^‚µ‚ÄƒƒOƒCƒ“</button>
+        <button class="btn btn-secondary" style="flex:1; min-height:2.4rem;" onclick="closeRegisterModal()">ã‚­ãƒ£ãƒ³ã‚»ãƒ«</button>
+        <button class="btn btn-red" style="flex:1; min-height:2.4rem;" onclick="doRegister()">ç™»éŒ²ã—ã¦ãƒ­ã‚°ã‚¤ãƒ³</button>
       </div>
     </div>
   </div>
 
-  <!-- ’•¶‘I‘ğƒ‚[ƒ_ƒ‹ -->
+  <!-- æ³¨æ–‡é¸æŠãƒ¢ãƒ¼ãƒ€ãƒ« -->
   <div id="orderModal" class="modal">
     <div class="modal-panel">
       <div id="modalDateTitle" class="modal-title"></div>
       <div id="popupMenuRows"></div>
       <div style="margin-top:1rem; display:flex; gap:0.5rem;">
-        <button class="btn btn-secondary" style="flex:1; min-height:2.6rem;" onclick="closeModal()">ƒLƒƒƒ“ƒZƒ‹</button>
-        <button class="btn btn-red" style="flex:1; min-height:2.6rem;" onclick="applyOrder()">Œˆ’è</button>
+        <button class="btn btn-secondary" style="flex:1; min-height:2.6rem;" onclick="closeModal()">ã‚­ãƒ£ãƒ³ã‚»ãƒ«</button>
+        <button class="btn btn-red" style="flex:1; min-height:2.6rem;" onclick="applyOrder()">æ±ºå®š</button>
       </div>
     </div>
   </div>
 
-  <!-- ƒ[ƒfƒBƒ“ƒO•\¦ -->
+  <!-- ãƒ­ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°è¡¨ç¤º -->
   <div id="loading" class="loading">
     <div class="spinner"></div>
-    <div id="loadingText">ˆ—’†...</div>
+    <div id="loadingText">å‡¦ç†ä¸­...</div>
   </div>
 
   <script>
-    // ššš æ“¾‚µ‚½GAS‚ÌuƒEƒFƒuƒAƒvƒŠURLv‚ğˆÈ‰º‚É“\‚è•t‚¯‚Ä‚­‚¾‚³‚¢ ššš
+    // â˜…â˜…â˜… å–å¾—ã—ãŸGASã®ã€Œã‚¦ã‚§ãƒ–ã‚¢ãƒ—ãƒªURLã€ã‚’ä»¥ä¸‹ã«è²¼ã‚Šä»˜ã‘ã¦ãã ã•ã„ â˜…â˜…â˜…
     const GAS_API_URL = "https://script.google.com/macros/s/AKfycbzepgsfx3t4F-XEFPl80WBcV_sLdaNpG63wj1bKPClZkVFjfJD5lOBju9BYCJPdP_0/exec";
 
-    const MENUS_TOP = ["å", "•›‚`", "•›‚a"];
-    const MENUS_BOTTOM = ["‚¤‚Ç‚ñ", "‚»‚Î", "ƒ‰[ƒƒ“", "ƒJƒŒ[ƒ‹["];
+    const MENUS_TOP = ["ä¸»", "å‰¯ï¼¡", "å‰¯ï¼¢"];
+    const MENUS_BOTTOM = ["ã†ã©ã‚“", "ãã°", "ãƒ©ãƒ¼ãƒ¡ãƒ³", "ã‚«ãƒ¬ãƒ¼ãƒ«ãƒ¼"];
     const ALL_MENUS = [...MENUS_TOP, ...MENUS_BOTTOM];
 
     const MENU_URL = "https://drive.google.com/file/d/18Ls3VF72bu_GxxrxRSd2tPhl8011hmEq/view?usp=drive_link";
@@ -287,12 +287,12 @@
     let monthOffset = 0;
     let tempUserData = null;
 
-    // GAS API ’ÊM—p‚Ì‹¤’ÊŠÖ” (fetch & JSON)
+    // GAS API é€šä¿¡ç”¨ã®å…±é€šé–¢æ•° (fetch & JSON)
     async function callGasApi(action, payloadData = {}) {
       const payload = { action: action, ...payloadData };
       
-      // GAS‚ÌWeb Apps‚ÍPOSTƒf[ƒ^‚ğó‚¯æ‚é‚Æ302ƒŠƒ_ƒCƒŒƒNƒg‚ª”­¶‚·‚é‚½‚ß
-      // ƒeƒLƒXƒgŒ`®‚Æ‚µ‚Ä‘—‚èJSON‚Æ‚µ‚Äƒp[ƒX‚·‚é
+      // GASã®Web Appsã¯POSTãƒ‡ãƒ¼ã‚¿ã‚’å—ã‘å–ã‚‹ã¨302ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆãŒç™ºç”Ÿã™ã‚‹ãŸã‚
+      // ãƒ†ã‚­ã‚¹ãƒˆå½¢å¼ã¨ã—ã¦é€ã‚ŠJSONã¨ã—ã¦ãƒ‘ãƒ¼ã‚¹ã™ã‚‹
       const response = await fetch(GAS_API_URL, {
         method: "POST",
         headers: {
@@ -310,11 +310,11 @@
       msg.textContent = "";
 
       if(!code) {
-        msg.textContent = "ĞˆõƒR[ƒh‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B";
+        msg.textContent = "ç¤¾å“¡ã‚³ãƒ¼ãƒ‰ã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚";
         return;
       }
 
-      setLoading(true, "ƒƒOƒCƒ“Šm”F’†...");
+      setLoading(true, "ãƒ­ã‚°ã‚¤ãƒ³ç¢ºèªä¸­...");
       try {
         const res = await callGasApi("confirmLogin", { empCode: code });
         setLoading(false);
@@ -323,7 +323,7 @@
           if(res.isNew) {
             document.getElementById("regEmpCode").value = res.empCode;
             document.getElementById("regEmpName").value = "";
-            document.getElementById("regDeptSelect").value = "‘–±•”";
+            document.getElementById("regDeptSelect").value = "ç·å‹™éƒ¨";
             document.getElementById("regCustomDept").value = "";
             toggleCustomDept();
             document.getElementById("regMsg").textContent = "";
@@ -336,11 +336,11 @@
             document.getElementById("loginConfirmModal").style.display = "flex";
           }
         } else {
-          msg.textContent = res.message || "ƒƒOƒCƒ“‚É¸”s‚µ‚Ü‚µ‚½B";
+          msg.textContent = res.message || "ãƒ­ã‚°ã‚¤ãƒ³ã«å¤±æ•—ã—ã¾ã—ãŸã€‚";
         }
       } catch(err) {
         setLoading(false);
-        msg.textContent = "’ÊMƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½BURL‚Ìİ’è‚ğŠm”F‚µ‚Ä‚­‚¾‚³‚¢B";
+        msg.textContent = "é€šä¿¡ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚URLã®è¨­å®šã‚’ç¢ºèªã—ã¦ãã ã•ã„ã€‚";
       }
     }
 
@@ -372,11 +372,11 @@
       msg.textContent = "";
 
       if(!name) {
-        msg.textContent = "–¼‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢B";
+        msg.textContent = "æ°åã‚’å…¥åŠ›ã—ã¦ãã ã•ã„ã€‚";
         return;
       }
 
-      setLoading(true, "Ğˆõ“o˜^’†...");
+      setLoading(true, "ç¤¾å“¡ç™»éŒ²ä¸­...");
       try {
         const res = await callGasApi("registerEmployee", { empCode: code, empName: name, dept: dept });
         setLoading(false);
@@ -386,11 +386,11 @@
           tempUserData = res;
           proceedToOrder();
         } else {
-          msg.textContent = res.message || "“o˜^‚É¸”s‚µ‚Ü‚µ‚½B";
+          msg.textContent = res.message || "ç™»éŒ²ã«å¤±æ•—ã—ã¾ã—ãŸã€‚";
         }
       } catch(err) {
         setLoading(false);
-        msg.textContent = "’ÊMƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B";
+        msg.textContent = "é€šä¿¡ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚";
       }
     }
 
@@ -417,7 +417,7 @@
 
     async function loadInitialData(offset) {
       monthOffset = offset;
-      setLoading(true, "ƒf[ƒ^“Ç‚İ‚İ’†...");
+      setLoading(true, "ãƒ‡ãƒ¼ã‚¿èª­ã¿è¾¼ã¿ä¸­...");
 
       try {
         const res = await callGasApi("getInitialData", { token: currentToken, monthOffset: offset });
@@ -433,7 +433,7 @@
         }
       } catch(err) {
         setLoading(false);
-        alert("’ÊMƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B");
+        alert("é€šä¿¡ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚");
       }
     }
 
@@ -487,8 +487,8 @@
         bottomGridHtml += '</div>';
 
         const statusBadge = day.canEdit 
-          ? '<span class="status-badge status-open">ó•t’†</span>'
-          : '<span class="status-badge status-closed">’÷Ø</span>';
+          ? '<span class="status-badge status-open">å—ä»˜ä¸­</span>'
+          : '<span class="status-badge status-closed">ç· åˆ‡</span>';
 
         card.innerHTML = `
           <div class="card-head">
@@ -504,7 +504,7 @@
 
     function openOrderModal(day) {
       selectedDate = day.date;
-      document.getElementById("modalDateTitle").textContent = `${day.displayDate} (${day.weekName}) ‚Ì’•¶•ÏX`;
+      document.getElementById("modalDateTitle").textContent = `${day.displayDate} (${day.weekName}) ã®æ³¨æ–‡å¤‰æ›´`;
 
       const rowsContainer = document.getElementById("popupMenuRows");
       rowsContainer.innerHTML = "";
@@ -524,11 +524,11 @@
               <span class="slider"></span>
             </label>
             <select id="select_${m}" class="qty-select ${qty === 0 ? 'hidden' : ''}">
-              <option value="1" ${qty <= 1 ? 'selected' : ''}>1ŒÂ</option>
-              <option value="2" ${qty === 2 ? 'selected' : ''}>2ŒÂ</option>
-              <option value="3" ${qty === 3 ? 'selected' : ''}>3ŒÂ</option>
-              <option value="4" ${qty === 4 ? 'selected' : ''}>4ŒÂ</option>
-              <option value="5" ${qty === 5 ? 'selected' : ''}>5ŒÂ</option>
+              <option value="1" ${qty <= 1 ? 'selected' : ''}>1å€‹</option>
+              <option value="2" ${qty === 2 ? 'selected' : ''}>2å€‹</option>
+              <option value="3" ${qty === 3 ? 'selected' : ''}>3å€‹</option>
+              <option value="4" ${qty === 4 ? 'selected' : ''}>4å€‹</option>
+              <option value="5" ${qty === 5 ? 'selected' : ''}>5å€‹</option>
             </select>
           </div>
         `;
@@ -564,7 +564,7 @@
       });
 
       closeModal();
-      setLoading(true, "’•¶•Û‘¶’†...");
+      setLoading(true, "æ³¨æ–‡ä¿å­˜ä¸­...");
 
       try {
         const res = await callGasApi("saveOrder", {
@@ -581,11 +581,11 @@
           currentOrders = res.orders || {};
           renderCards();
         } else {
-          alert(res.message || "•Û‘¶‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½B");
+          alert(res.message || "ä¿å­˜ã§ãã¾ã›ã‚“ã§ã—ãŸã€‚");
         }
       } catch(err) {
         setLoading(false);
-        alert("’ÊMƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B");
+        alert("é€šä¿¡ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚");
       }
     }
 
@@ -602,7 +602,7 @@
     }
 
     function setLoading(show, text) {
-      document.getElementById("loadingText").textContent = text || "ˆ—’†...";
+      document.getElementById("loadingText").textContent = text || "å‡¦ç†ä¸­...";
       document.getElementById("loading").style.display = show ? "flex" : "none";
     }
   </script>
