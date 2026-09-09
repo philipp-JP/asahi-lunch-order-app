@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>旭工場食事注文???</title>
+  <style>
+    * { box-sizing: border-box; }
+    
+    html {
+      font-size: 18px;
+    }
+
+    @media screen and (max-width: 768px) {
+      html {
+        font-size: 24px !important;
+      }
+    }
+
+    body { 
+      margin: 0; 
+      background: #fdf8f8; 
+      color: #2c2c2c; 
+      font-family: "Yu Gothic", Meiryo, sans-serif; 
+      font-size: 1rem; 
+      -webkit-text-size-adjust: 100%;
+    }
+    .hidden { display: none !important; }
+
+    /* ヘッダー：固定解除 */
+    .header { 
+      display: flex; align-items: center; justify-content: space-between; 
+      min-height: 2.5rem; padding: 0.5rem 0.6rem; 
+      color: #fff; background: #d32f2f; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15); 
+    }
+    
+    .header h1 { 
+      margin: 0; 
+      font-size: clamp(0.9rem, 4.5vw, 1.2rem); 
+      text-align: center; 
+      flex: 1; 
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ボタン基底 */
+    .btn { min-height: 2.2rem; padding: 0.4rem 0.8rem; border: 0; border-radius: 8px; font-weight: bold; cursor: pointer; touch-action: manipulation; font-size: 0.9rem; }
+    .btn-red { color: #fff; background: #d32f2f; }
+    .btn-red:hover { background: #b71c1c; }
+    .btn-secondary { color: #fff; background: #757575; }
+    
+    .btn-logout { 
+      transform: scale(0.75); 
+      transform-origin: right center; 
+      padding: 0.3rem 0.6rem;
+      margin-left: -1rem; 
+    }
+
+    .container { max-width: 900px; margin: 0.5rem auto; padding: 0 0.5rem; }
+    .panel { background: #fff; border-radius: 12px; padding: 0.8rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 0.6rem; }
+
+    /* コンテンツ文字サイズ 20% 縮小 */
+    #orderSection {
+      font-size: 0.8rem !important;
+    }
+
+    /* ログイン画面 */
+    .login-panel { max-width: 480px; margin: 1.5rem auto; text-align: center; }
+    .login-panel h2 { color: #d32f2f; margin-top: 0; font-size: 1.3rem; }
+    .login-input { width: 100%; height: 2.6rem; font-size: 1.1rem; padding: 0.3rem 0.6rem; margin: 0.8rem 0; border: 2px solid #ccc; border-radius: 8px; text-align: center; }
+
+    /* 月切替ボタン */
+    .month-nav { display: flex; gap: 0.4rem; margin-bottom: 0.6rem; }
+    .month-nav .btn { flex: 1; font-size: 0.85em; }
+
+    .user-info { line-height: 1.5; }
+    .btn-menu { width: 100%; margin-top: 0.5rem; background: #e65100; color: #fff; font-size: 0.9em; min-height: 2.2rem; }
+
+    /* 注文カード */
+    .day-card { border: 2px solid #e0e0e0; border-left: 8px solid #d32f2f; border-radius: 10px; background: #fff; margin-bottom: 0.6rem; padding: 0.5rem; cursor: pointer; transition: background-color 0.2s; }
+    .day-card.locked { border-left-color: #9e9e9e; background: #f2f2f2; opacity: 0.7; cursor: not-allowed; }
+    
+    .card-head { font-size: 1em; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 0.3rem; margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+    .status-badge { font-size: 0.8em; padding: 0.1rem 0.4rem; border-radius: 4px; color: #fff; font-weight: bold; }
+    .status-open { background-color: #2e7d32; }
+    .status-closed { background-color: #757575; }
+
+    /* メニュー表示エリア */
+    .menu-grid-top { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; text-align: center; margin-bottom: 4px; }
+    .menu-grid-bottom { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; text-align: center; }
+    
+    .menu-item-box { background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 6px; padding: 0.3rem 0.1rem; }
+    .menu-title { font-size: 0.85em; color: #666; font-weight: bold; }
+    
+    .menu-item-box.ordered {
+      background: #000000 !important;
+      border: 1px solid #000000;
+    }
+    .menu-item-box.ordered .menu-title {
+      color: #ffffff !important;
+    }
+    
+    .menu-rice { 
+      font-size: 1.1em; 
+      min-height: 1.2rem; 
+      margin-top: 0.1rem; 
+      word-break: break-all; 
+      line-height: 1.1;
+      color: #888;
+    }
+    .menu-item-box.ordered .menu-rice {
+      color: #ffffff;
+    }
+
+    /* ポップアップ・モーダル */
+    .modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: flex-end; justify-content: center; background: rgba(0,0,0,0.6); }
+    .modal-center { align-items: center !important; }
+    .modal-panel { width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; background: #fff; border-radius: 18px 18px 0 0; padding: 1.2rem; }
+    .modal-panel-center { width: 90%; max-width: 420px; border-radius: 18px; padding: 1.2rem; }
+    
+    .modal-title { font-size: 1.1rem; font-weight: bold; color: #d32f2f; margin-bottom: 0.8rem; border-bottom: 2px solid #d32f2f; padding-bottom: 0.4rem; text-align: center; }
+
+    /* 入力フォーム */
+    .form-group { margin-bottom: 0.8rem; text-align: left; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 0.2rem; font-size: 0.9em; }
+    .form-control { width: 100%; height: 2.2rem; font-size: 0.9em; padding: 0.2rem 0.5rem; border: 1.5px solid #ccc; border-radius: 6px; }
+
+    .popup-menu-row { display: flex; align-items: center; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid #eee; }
+    .popup-menu-label { font-size: 1em; font-weight: bold; }
+
+    .toggle-switch { position: relative; display: inline-block; width: 3rem; height: 1.6rem; flex-shrink: 0; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; inset: 0; background-color: #ccc; transition: .2s; border-radius: 1.6rem; }
+    .slider:before { position: absolute; content: ""; height: 1.2rem; width: 1.2rem; left: 0.2rem; bottom: 0.2rem; background-color: white; transition: .2s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+    input:checked + .slider { background-color: #d32f2f; }
+    input:checked + .slider:before { transform: translateX(1.4rem); }
+
+    .qty-select { 
+      font-size: 0.9em; 
+      padding: 0.1rem 0.4rem; 
+      border-radius: 6px; 
+      border: 2px solid #d32f2f; 
+      margin-left: 0.5rem; 
+      font-weight: bold; 
+      background: #fff; 
+      height: 2rem; 
+    }
+
+    .loading { position: fixed; inset: 0; z-index: 200; display: none; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.85); font-size: 1rem; color: #d32f2f; font-weight: bold; }
+    .spinner { width: 2rem; height: 2rem; border: 4px solid #ffcdd2; border-top-color: #d32f2f; border-radius: 50%; animation: spin .8s linear infinite; margin-bottom: 0.5rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <div style="width:1.5rem;"></div>
+    <h1>旭工場食事注文</h1>
+    <button id="logoutBtn" class="btn btn-secondary btn-logout hidden" onclick="logoutApp()">ログアウト</button>
+  </header>
+
+  <main class="container">
+    <!-- ログイン画面 -->
+    <section id="loginSection" class="panel login-panel">
+      <h2>ログイン</h2>
+      <input type="text" id="loginEmpCode" class="login-input" placeholder="社員コードを入力">
+      <button class="btn btn-red" style="width:100%; min-height: 2.6rem;" onclick="doLogin()">ログイン</button>
+      <div id="loginMsg" style="color:#d32f2f; font-weight:bold; margin-top:0.5rem;"></div>
+    </section>
+
+    <!-- メイン注文画面 -->
+    <section id="orderSection" class="hidden">
+      <!-- 月切替ボタン -->
+      <div class="month-nav">
+        <button id="btnPrev" class="btn btn-secondary" onclick="changeMonth(-1)">先月</button>
+        <button id="btnCurr" class="btn btn-red" onclick="changeMonth(0)">当月</button>
+        <button id="btnNext" class="btn btn-secondary" onclick="changeMonth(1)">来月</button>
+      </div>
+
+      <div class="panel user-info">
+        <div><strong>社員コード:</strong> <span id="dispEmpCode"></span></div>
+        <div><strong>氏名:</strong> <span id="dispEmpName"></span> (<span id="dispDept"></span>)</div>
+        <button class="btn btn-menu" onclick="openWeeklyMenu()">?? 今週のメニューを見る</button>
+      </div>
+
+      <!-- 1日ごとのカード一覧 -->
+      <div id="cardContainer"></div>
+    </section>
+  </main>
+
+  <!-- 社員情報確認ポップアップ -->
+  <div id="loginConfirmModal" class="modal modal-center">
+    <div class="modal-panel modal-panel-center">
+      <div class="modal-title">社員情報確認</div>
+      <div style="margin: 1rem 0; font-size: 0.95rem; text-align: left; line-height: 1.8;">
+        <div><strong>社員コード:</strong> <span id="confirmEmpCode"></span></div>
+        <div><strong>氏名:</strong> <span id="confirmEmpName"></span></div>
+        <div><strong>部署:</strong> <span id="confirmDept"></span></div>
+      </div>
+      <div style="display:flex; gap:0.5rem;">
+        <button class="btn btn-secondary" style="flex:1; min-height:2.4rem;" onclick="closeLoginConfirmModal()">キャンセル</button>
+        <button class="btn btn-red" style="flex:1; min-height:2.4rem;" onclick="proceedToOrder()">確認</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 新規社員登録ポップアップ -->
+  <div id="registerModal" class="modal modal-center">
+    <div class="modal-panel modal-panel-center">
+      <div class="modal-title">新規社員登録</div>
+      <p style="font-size: 0.85em; color: #666; margin-bottom: 0.8rem;">登録がありません。新規登録を行ってください。</p>
+      
+      <div class="form-group">
+        <label>社員コード</label>
+        <input type="text" id="regEmpCode" class="form-control" readonly style="background:#eee;">
+      </div>
+      
+      <div class="form-group">
+        <label>氏名 <span style="color:red;">*</span></label>
+        <input type="text" id="regEmpName" class="form-control" placeholder="山田 太郎">
+      </div>
+      
+      <div class="form-group">
+        <label>部署名</label>
+        <select id="regDeptSelect" class="form-control" onchange="toggleCustomDept()">
+          <option value="総務部">総務部</option>
+          <option value="技術部">技術部</option>
+          <option value="営業部">営業部</option>
+          <option value="品証部">品証部</option>
+          <option value="製造部">製造部</option>
+          <option value="航空機">航空機</option>
+          <option value="生管・購買部">生管・購買部</option>
+          <option value="__OTHER__">直接入力（自由記述）</option>
+        </select>
+      </div>
+
+      <div class="form-group hidden" id="customDeptGroup">
+        <label>部署名（直接入力）</label>
+        <input type="text" id="regCustomDept" class="form-control" placeholder="部署名を入力">
+      </div>
+
+      <div id="regMsg" style="color:red; font-size:0.85em; margin-bottom:0.5rem;"></div>
+
+      <div style="display:flex; gap:0.5rem; margin-top: 1rem;">
+        <button class="btn btn-secondary" style="flex:1; min-height:2.4rem;" onclick="closeRegisterModal()">キャンセル</button>
+        <button class="btn btn-red" style="flex:1; min-height:2.4rem;" onclick="doRegister()">登録してログイン</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 注文選択モーダル -->
+  <div id="orderModal" class="modal">
+    <div class="modal-panel">
+      <div id="modalDateTitle" class="modal-title"></div>
+      <div id="popupMenuRows"></div>
+      <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+        <button class="btn btn-secondary" style="flex:1; min-height:2.6rem;" onclick="closeModal()">キャンセル</button>
+        <button class="btn btn-red" style="flex:1; min-height:2.6rem;" onclick="applyOrder()">決定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ローディング表示 -->
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <div id="loadingText">処理中...</div>
+  </div>
+
+  <script>
+    // ★★★ 取得したGASの「ウェブアプリURL」を以下に貼り付けてください ★★★
+    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwN4gJdRFFVeJYcRtpxSHYKlPAE3CTMAmpPcafwGgKWk1hdNew4EyTUmLPSVWUsN4tS/exec";
+
+    const MENUS_TOP = ["主", "副Ａ", "副Ｂ"];
+    const MENUS_BOTTOM = ["うどん", "そば", "ラーメン", "カレールー"];
+    const ALL_MENUS = [...MENUS_TOP, ...MENUS_BOTTOM];
+
+    const MENU_URL = "https://drive.google.com/file/d/18Ls3VF72bu_GxxrxRSd2tPhl8011hmEq/view?usp=drive_link";
+    
+    let currentToken = "";
+    let currentOrders = {}; 
+    let periodData = [];
+    let selectedDate = "";
+    let monthOffset = 0;
+    let tempUserData = null;
+
+    // GAS API 通信用の共通関数 (fetch & JSON)
+    async function callGasApi(action, payloadData = {}) {
+      const payload = { action: action, ...payloadData };
+      
+      // GASのWeb AppsはPOSTデータを受け取ると302リダイレクトが発生するため
+      // テキスト形式として送りJSONとしてパースする
+      const response = await fetch(GAS_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      return await response.json();
+    }
+
+    async function doLogin() {
+      const code = document.getElementById("loginEmpCode").value.trim();
+      const msg = document.getElementById("loginMsg");
+      msg.textContent = "";
+
+      if(!code) {
+        msg.textContent = "社員コードを入力してください。";
+        return;
+      }
+
+      setLoading(true, "ログイン確認中...");
+      try {
+        const res = await callGasApi("confirmLogin", { empCode: code });
+        setLoading(false);
+
+        if(res.success) {
+          if(res.isNew) {
+            document.getElementById("regEmpCode").value = res.empCode;
+            document.getElementById("regEmpName").value = "";
+            document.getElementById("regDeptSelect").value = "総務部";
+            document.getElementById("regCustomDept").value = "";
+            toggleCustomDept();
+            document.getElementById("regMsg").textContent = "";
+            document.getElementById("registerModal").style.display = "flex";
+          } else {
+            tempUserData = res;
+            document.getElementById("confirmEmpCode").textContent = res.employee.empCode;
+            document.getElementById("confirmEmpName").textContent = res.employee.empName;
+            document.getElementById("confirmDept").textContent = res.employee.dept || "-";
+            document.getElementById("loginConfirmModal").style.display = "flex";
+          }
+        } else {
+          msg.textContent = res.message || "ログインに失敗しました。";
+        }
+      } catch(err) {
+        setLoading(false);
+        msg.textContent = "通信エラーが発生しました。URLの設定を確認してください。";
+      }
+    }
+
+    function toggleCustomDept() {
+      const sel = document.getElementById("regDeptSelect").value;
+      const grp = document.getElementById("customDeptGroup");
+      if(sel === "__OTHER__") {
+        grp.classList.remove("hidden");
+      } else {
+        grp.classList.add("hidden");
+      }
+    }
+
+    function closeRegisterModal() {
+      document.getElementById("registerModal").style.display = "none";
+    }
+
+    async function doRegister() {
+      const code = document.getElementById("regEmpCode").value.trim();
+      const name = document.getElementById("regEmpName").value.trim();
+      const selDept = document.getElementById("regDeptSelect").value;
+      let dept = selDept;
+
+      if(selDept === "__OTHER__") {
+        dept = document.getElementById("regCustomDept").value.trim();
+      }
+
+      const msg = document.getElementById("regMsg");
+      msg.textContent = "";
+
+      if(!name) {
+        msg.textContent = "氏名を入力してください。";
+        return;
+      }
+
+      setLoading(true, "社員登録中...");
+      try {
+        const res = await callGasApi("registerEmployee", { empCode: code, empName: name, dept: dept });
+        setLoading(false);
+
+        if(res.success) {
+          closeRegisterModal();
+          tempUserData = res;
+          proceedToOrder();
+        } else {
+          msg.textContent = res.message || "登録に失敗しました。";
+        }
+      } catch(err) {
+        setLoading(false);
+        msg.textContent = "通信エラーが発生しました。";
+      }
+    }
+
+    function closeLoginConfirmModal() {
+      document.getElementById("loginConfirmModal").style.display = "none";
+      tempUserData = null;
+    }
+
+    function proceedToOrder() {
+      if(!tempUserData) return;
+
+      currentToken = tempUserData.token;
+      document.getElementById("dispEmpCode").textContent = tempUserData.employee.empCode;
+      document.getElementById("dispEmpName").textContent = tempUserData.employee.empName;
+      document.getElementById("dispDept").textContent = tempUserData.employee.dept || "-";
+
+      closeLoginConfirmModal();
+      document.getElementById("loginSection").classList.add("hidden");
+      document.getElementById("orderSection").classList.remove("hidden");
+      document.getElementById("logoutBtn").classList.remove("hidden");
+
+      loadInitialData(0);
+    }
+
+    async function loadInitialData(offset) {
+      monthOffset = offset;
+      setLoading(true, "データ読み込み中...");
+
+      try {
+        const res = await callGasApi("getInitialData", { token: currentToken, monthOffset: offset });
+        setLoading(false);
+
+        if(res.success) {
+          currentOrders = res.orders || {};
+          periodData = res.period || [];
+          updateMonthNavButtons();
+          renderCards();
+        } else {
+          alert(res.message);
+        }
+      } catch(err) {
+        setLoading(false);
+        alert("通信エラーが発生しました。");
+      }
+    }
+
+    function changeMonth(offset) {
+      loadInitialData(offset);
+    }
+
+    function updateMonthNavButtons() {
+      document.getElementById("btnPrev").className = "btn " + (monthOffset === -1 ? "btn-red" : "btn-secondary");
+      document.getElementById("btnCurr").className = "btn " + (monthOffset === 0 ? "btn-red" : "btn-secondary");
+      document.getElementById("btnNext").className = "btn " + (monthOffset === 1 ? "btn-red" : "btn-secondary");
+    }
+
+    function renderCards() {
+      const container = document.getElementById("cardContainer");
+      container.innerHTML = "";
+
+      periodData.forEach(day => {
+        const card = document.createElement("div");
+        card.className = "day-card" + (!day.canEdit ? " locked" : "");
+        if(day.canEdit) {
+          card.onclick = () => openOrderModal(day);
+        }
+
+        const dayOrders = currentOrders[day.date] || {};
+
+        let topGridHtml = '<div class="menu-grid-top">';
+        MENUS_TOP.forEach(m => {
+          const qty = Number(dayOrders[m] || 0);
+          const isOrdered = qty > 0;
+          const rices = isOrdered ? "??".repeat(qty) : "-";
+          topGridHtml += `
+            <div class="menu-item-box ${isOrdered ? 'ordered' : ''}">
+              <div class="menu-title">${m}</div>
+              <div class="menu-rice">${rices}</div>
+            </div>`;
+        });
+        topGridHtml += '</div>';
+
+        let bottomGridHtml = '<div class="menu-grid-bottom">';
+        MENUS_BOTTOM.forEach(m => {
+          const qty = Number(dayOrders[m] || 0);
+          const isOrdered = qty > 0;
+          const rices = isOrdered ? "??".repeat(qty) : "-";
+          bottomGridHtml += `
+            <div class="menu-item-box ${isOrdered ? 'ordered' : ''}">
+              <div class="menu-title">${m}</div>
+              <div class="menu-rice">${rices}</div>
+            </div>`;
+        });
+        bottomGridHtml += '</div>';
+
+        const statusBadge = day.canEdit 
+          ? '<span class="status-badge status-open">受付中</span>'
+          : '<span class="status-badge status-closed">締切</span>';
+
+        card.innerHTML = `
+          <div class="card-head">
+            <span>${day.displayDate} (${day.weekName})</span>
+            ${statusBadge}
+          </div>
+          ${topGridHtml}
+          ${bottomGridHtml}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openOrderModal(day) {
+      selectedDate = day.date;
+      document.getElementById("modalDateTitle").textContent = `${day.displayDate} (${day.weekName}) の注文変更`;
+
+      const rowsContainer = document.getElementById("popupMenuRows");
+      rowsContainer.innerHTML = "";
+
+      const dayOrders = currentOrders[day.date] || {};
+
+      ALL_MENUS.forEach(m => {
+        const qty = Number(dayOrders[m] || 0);
+        const row = document.createElement("div");
+        row.className = "popup-menu-row";
+
+        row.innerHTML = `
+          <span class="popup-menu-label">${m}</span>
+          <div style="display:flex; align-items:center;">
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle_${m}" ${qty > 0 ? 'checked' : ''} onchange="onToggleChange('${m}')">
+              <span class="slider"></span>
+            </label>
+            <select id="select_${m}" class="qty-select ${qty === 0 ? 'hidden' : ''}">
+              <option value="1" ${qty <= 1 ? 'selected' : ''}>1個</option>
+              <option value="2" ${qty === 2 ? 'selected' : ''}>2個</option>
+              <option value="3" ${qty === 3 ? 'selected' : ''}>3個</option>
+              <option value="4" ${qty === 4 ? 'selected' : ''}>4個</option>
+              <option value="5" ${qty === 5 ? 'selected' : ''}>5個</option>
+            </select>
+          </div>
+        `;
+        rowsContainer.appendChild(row);
+      });
+
+      document.getElementById("orderModal").style.display = "flex";
+    }
+
+    function onToggleChange(menu) {
+      const isChecked = document.getElementById(`toggle_${menu}`).checked;
+      const select = document.getElementById(`select_${menu}`);
+      if (isChecked) {
+        select.classList.remove("hidden");
+      } else {
+        select.classList.add("hidden");
+        select.value = "1";
+      }
+    }
+
+    async function applyOrder() {
+      const items = {};
+
+      ALL_MENUS.forEach(m => {
+        const isChecked = document.getElementById(`toggle_${m}`).checked;
+        const selectQty = Number(document.getElementById(`select_${m}`).value);
+
+        if (isChecked) {
+          items[m] = selectQty;
+        } else {
+          items[m] = 0;
+        }
+      });
+
+      closeModal();
+      setLoading(true, "注文保存中...");
+
+      try {
+        const res = await callGasApi("saveOrder", {
+          token: currentToken,
+          payload: {
+            date: selectedDate,
+            items: items,
+            monthOffset: monthOffset
+          }
+        });
+
+        setLoading(false);
+        if(res.success) {
+          currentOrders = res.orders || {};
+          renderCards();
+        } else {
+          alert(res.message || "保存できませんでした。");
+        }
+      } catch(err) {
+        setLoading(false);
+        alert("通信エラーが発生しました。");
+      }
+    }
+
+    function openWeeklyMenu() {
+      window.open(MENU_URL, "_blank");
+    }
+
+    function closeModal() {
+      document.getElementById("orderModal").style.display = "none";
+    }
+
+    function logoutApp() {
+      location.reload();
+    }
+
+    function setLoading(show, text) {
+      document.getElementById("loadingText").textContent = text || "処理中...";
+      document.getElementById("loading").style.display = show ? "flex" : "none";
+    }
+  </script>
+</body>
+</html>
