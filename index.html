@@ -464,7 +464,7 @@
         MENUS_TOP.forEach(m => {
           const qty = Number(dayOrders[m] || 0);
           const isOrdered = qty > 0;
-          const rices = isOrdered ? "🍚".repeat(qty) : "-";
+          const rices = isOrdered ? "〇".repeat(qty) : "-";
           topGridHtml += `
             <div class="menu-item-box ${isOrdered ? 'ordered' : ''}">
               <div class="menu-title">${m}</div>
@@ -477,7 +477,7 @@
         MENUS_BOTTOM.forEach(m => {
           const qty = Number(dayOrders[m] || 0);
           const isOrdered = qty > 0;
-          const rices = isOrdered ? "🍚".repeat(qty) : "-";
+          const rices = isOrdered ? "〇".repeat(qty) : "-";
           bottomGridHtml += `
             <div class="menu-item-box ${isOrdered ? 'ordered' : ''}">
               <div class="menu-title">${m}</div>
